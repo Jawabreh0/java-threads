@@ -55,6 +55,10 @@ t.start();
 }
 ```
 
+## Life Cycle of a Thread (Thread States)
+
+![thread-stats](thread-stats.png)
+
 
 
 

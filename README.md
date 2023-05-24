@@ -31,27 +31,28 @@ Two ways to create thread:
 ```java 
 private class HelloThread{
 
-public void run(){
-System.out.println("Hello Thread");
-}
-public static void main(String args[]){
-Thread t = new HelloThread();
-t.start();
-}
+public class Main extends Thread{
+
+    public void run(){
+        System.out.println("Hello From Thread");
+    }
+    public static void main(String[] args) {
+        Thread t = new Main();
+        t.start();
+    }
 }
 ```
 2. Implementing Runnable Interface:
 
 ```java 
-private class HelloThread{
-
-public void run(){
-System.out.println("Hello Thread");
-}
-public static void main(String args[]){
-Thread t = new Thread(new HelloThread());
-t.start();
-}
+public class Main implements Runnable{
+    public void run(){
+        System.out.println("Hello From Thread");
+    }
+    public static void main(String args[]){
+        Thread t = new Thread(new Main());
+        t.start();
+    }
 }
 ```
 
@@ -60,8 +61,69 @@ t.start();
 ![thread-stats](thread-stats.png)
 
 
+## Examples
+Creates ten threads to search for the maximum value of a large matrix. Each thread searches one portion of the matrix
+```java 
 
+import java.util.Random;
 
+public class Main {
+    final static int WIDTH = 100;
+    final static int HEIGHT = 100;
 
+    public static class WorkerThread extends Thread {
+        int max = Integer.MIN_VALUE;
+        int[] ourArray;
+
+        public WorkerThread(int[] ourArray) {
+            this.ourArray = ourArray;
+        }
+
+        public void run() {
+            for (int i = 0; i < ourArray.length; i++)
+                max = Math.max(max, ourArray[i]);
+        }
+
+        public int getMax() {
+            return max;
+        }
+    }
+
+    public static int[][] getBigHairyMatrix() {
+        int[][] int_array = new int[WIDTH][HEIGHT];
+        Random rand = new Random();
+
+        for (int i = 0; i < HEIGHT; i++) {
+            for (int j = 0; j < WIDTH; j++) {
+                int_array[i][j] = rand.nextInt();
+            }
+        }
+        return int_array;
+    }
+
+    public static void main(String args[]) {
+        WorkerThread[] threads = new WorkerThread[10];
+        int[][] bigMatrix = getBigHairyMatrix();
+        int max = Integer.MIN_VALUE;
+
+        for (int i = 0; i < 10; i++) {
+            threads[i] = new WorkerThread(bigMatrix[i]);
+            threads[i].start();
+        }
+
+        try {
+            for (int i = 0; i < 10; i++) {
+                threads[i].join();
+                max = Math.max(max, threads[i].getMax());
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Maximum value was " + max);
+    }
+}
+
+```
 
 

@@ -189,5 +189,5 @@ public class Main {
     }
 }
 ```
-
+Write a multithreaded JAVA application to multiply two 100 x 100 matrix, Like the previous example, again use 10 threads, Assign 10 rows to each thread, Fill your matrix with random values, Remember you are practicing the idea that, the main thread should wait for the other 10 threads to complete, so that it can form the final result
 

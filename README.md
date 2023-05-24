@@ -13,7 +13,7 @@ i.e. a thread is a subset of process.
 simulated parallel on a single-processor machine on a time-sharing basis.
 
 ## Multithreading
-1.Multithreading in java is a process of executing multiple threads simultaneously.
+1. Multithreading in java is a process of executing multiple threads simultaneously.
 2. Thread is basically a lightweight sub-process, a smallest unit of processing.
 Multiprocessing and multithreading, both are used to achieve multitasking.
 3. But we use multithreading than multiprocessing because threads share a common

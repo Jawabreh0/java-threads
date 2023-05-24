@@ -21,3 +21,43 @@ memory area.
 4. Threads don’t allocate separate memory area so saves memory,
 and context-switching between the threads takes less time than process.
 5. Java Multithreading is mostly used in games, animation etc.
+
+## Thread Creation
+
+Two ways to create thread: 
+
+1. Extending Thread Class: 
+
+```java 
+private class HelloThread{
+
+public void run(){
+System.out.println("Hello Thread");
+}
+public static void main(String args[]){
+Thread t = new HelloThread();
+t.start();
+}
+}
+```
+2. Implementing Runnable Interface:
+
+```java 
+private class HelloThread{
+
+public void run(){
+System.out.println("Hello Thread");
+}
+public static void main(String args[]){
+Thread t = new Thread(new HelloThread());
+t.start();
+}
+}
+```
+
+
+
+
+
+
+
